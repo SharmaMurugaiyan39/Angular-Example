@@ -188,8 +188,7 @@ export class RightContentComponent implements OnInit {
     this.apiService.saveZonalPostRequest(this.tableData,this.tableData[0].gridPlanId).subscribe(
       (response) => {
         console.log('Response from the API:', this.tableData[0].gridPlanId);
-        this.toastr.success('This is a success toast!', 'Success');
-     
+        this.toastr.success('Zonal Grid Plan Save Successfully!', 'Success');
        // this.successModel();
 
         // Handle the API response here
@@ -200,8 +199,8 @@ export class RightContentComponent implements OnInit {
         // Handle errors here
       }
     );
-    this.toastr.success('This is a success toast!', 'Success');
-    this.toastr.success('This is a success toast!', 'Success');
+    
+
   }
   confirmFunction()
   {
