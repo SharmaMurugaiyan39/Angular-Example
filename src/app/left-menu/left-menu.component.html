@@ -1,0 +1,16 @@
+<div  class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Left Menu -->
+      <div class="col-3" >
+        <ul class="list-unstyled justify-content-between" *ngFor="let item of gridPlans ; let i = index">
+
+          <li class="list-group-item"   (click)="selectMenuItem(item.gridPlanId.toString(),i)"
+            [ngClass]="{ 'active': i === activeIndex }">{{ item.gridPlanCode }}</li>
+          <!-- Add more menu items here if needed -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>

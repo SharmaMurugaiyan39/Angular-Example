@@ -1,0 +1,59 @@
+
+
+.nav-item>a:hover {
+    color: green;
+    
+}
+
+/*code to change background color*/
+.nav-link.active>a {
+    background-color:#007FFF;
+    color:white;
+    font-weight: bold;
+
+}
+td{
+  width: fit-content;white-space: nowrap;
+}
+
+th{
+  width: fit-content;white-space: nowrap;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+     width: fit-content;
+    background-color: #f1f1f1;
+    z-index: 1;
+  }
+
+  .table-responsive {
+    max-height: 500px; /* Set the desired height for the scrollable area */
+    overflow-y: auto;
+  }
+
+  
+
+.sticky-column {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: #f1f1f1;
+ 
+}
+
+/* Style for the table to support sticky column */
+.table-sticky {
+  table-layout: fixed; /* Fixed table layout to handle column width properly */
+}
+
+
+input[type=text] {
+  width: 100px;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}

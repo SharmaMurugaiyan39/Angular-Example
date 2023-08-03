@@ -1,0 +1,249 @@
+
+<div  class="container">
+  <ul class="nav nav-tabs nav-fill mb-3">
+    <li class="nav-link active" *ngFor="let item of tap" [ngClass]="{ 'active': item.isActive }" aria-current="page">
+      <a (load)="tapClickEnableRunning(item.label,item)" (click)="tapClickEnableRunning(item.label,item)" class="nav-link" >{{item.label}}</a>
+    </li>
+  </ul>
+  <app-success-message *ngIf="formSubmitted" [message]="successMessage"></app-success-message>
+ 
+  <div class="modal fade" id="myModalLabelAsm" tabindex="-1" role="dialog" *ngIf="showMessage">
+    
+  </div>
+  <div *ngIf="!isLoading">
+  <div style="margin-top:55px;margin-left: 10px;">
+    <div *ngIf="isNew" class="table-responsive">
+     
+      <table class="table align-center">
+        <thead class="thead-dark">
+          <tr>
+            <th class="sticky-column">Brand </th>
+            <th>State Plan Id</th>
+            <th>Size Cat</th>
+            <th>Product Type</th>
+            <th>Mrp</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>GridPlan Item Id</th>
+            <th>Grade </th>
+            <th>Image</th>
+            <th>Item Model id</th>
+            <th>Q.P</th>
+            <th>Asm Qty</th>
+            <th>Rsm Qty</th>
+            <th>Previous Month Sales</th>
+            <th>Depot Stack</th>
+            <th>P.M Sale 1</th>
+            <th>P.M Sale 2</th>
+            <th>P.M Sale 3</th>
+            <th>AP Asm Qty</th>
+            <th>AP Rsm Qty</th>
+            <th>AP Zonal Qty</th>
+        
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="tableData.length ==0">
+            <td  class="sticky-column" style="width: fit-content; margin-left: 0ch;" > No record Found</td>
+          </tr>
+          <tr *ngFor="let item of tableData;let i=index">
+            <td class="sticky-column">{{item.brand}}</td>
+            <td>{{item.statePlanId}}</td>
+            <td>{{item.sizeCat}}</td>
+            <td>{{item.productType}}</td>
+            <td>{{item.mrp}}</td>
+            <td>{{item.model}}</td>
+            <td>{{item.color}}</td>
+            <td>{{item.gridPlanItemId}}</td>
+            <td>{{item.grade}}</td>
+            <td><img src={{item.imageLink}} /></td>
+            <td>{{item.itemModelId}}</td>
+            <td>{{item.qtyToPlan}}</td>
+            <td>{{item.asmQty}}</td>
+            <td>{{item.rsmQty}}</td>
+            <td>{{item.previousMonthAverageSale}}</td>
+            <td>{{item.depotStock}}</td>
+            <td>{{item.pMsale1}}</td>
+            <td>{{item.pMsale2}}</td>
+            <td>{{item.pMsale3}}</td>
+            <td> {{item.apAsmQty}}
+
+              <!-- <input type="text" style="width: 50px;box-sizing: border-box;" >
+                &nbsp;<button (click)="openModelAsmCalculation(item,i)" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="" fill="currentColor" class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
+                <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+              </svg></button> -->
+            </td>
+            <td>
+              <!-- <input type="text" style="width: 50px;box-sizing: border-box;" >
+                &nbsp;<button (click)="openModelRsmCalculation(item,i)" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="" fill="currentColor" class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
+                <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+              </svg></button> -->
+              {{item.apRsmQty}}
+            </td>
+            <td>
+
+              <input type="text" style="width: 50px;box-sizing: border-box;" value="{{item.apZonalQty}}" #inputField>
+              &nbsp;<button (click)="openModelZonalCalculation(item,i,inputField.value)" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="" fill="currentColor"
+                  class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
+                  <path
+                    d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
+                  <path
+                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                </svg></button>
+            </td>
+      
+
+          </tr>
+        </tbody>
+
+      </table>
+  
+
+    </div>
+    <div *ngIf="tableData.length !==0">&nbsp;&nbsp; &nbsp;&nbsp;<button type="button" (click)="saveFunction()"
+        class="btn btn-primary btn-sm">Save</button>
+      &nbsp;&nbsp;
+      &nbsp;
+      <button type="button" (click)="confirmFunction()" class="btn btn-primary btn-sm">Confirm</button>
+    </div>
+
+  </div>
+  <div class="modal fade" id="myModalLabelAsm" tabindex="-1" role="dialog" aria-labelledby="myModalLabelAsm"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+
+        <!-- Modal content goes here -->
+        <div class="modal-header">
+          <h2 class="modal-title" id="myModalLabel">Zonal Qty Calculation</h2>&nbsp;&nbsp; <h2 style="color:blue"
+            class="modal-title" id="myModalLabel"> {{showTableData.brand}}</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table align-center">
+            <thead>
+              <tr *ngFor="let item of showTableData.apAsmQtyList;let i=index">
+                <th *ngIf="i==0">HEAD</th>
+                <th>ASM-{{i+1}}</th>
+                <th *ngIf="i==showTableData.apAsmQtyList.length-1">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of showTableData.apAsmQtyList;let i=index">
+                <th *ngIf="i==0">ASM</th>
+                <td>{{item.qty}}</td>
+                <td *ngIf="i==showTableData.apAsmQtyList.length-1">{{showTableData.apAsmQty}}</td>
+              </tr>
+              <tr *ngFor="let item of showTableData.apRsmQtyList;let i=index">
+                <th *ngIf="i==0">RSM</th>
+                <td>{{item.qty}}</td>
+                <td *ngIf="i==showTableData.apAsmQtyList.length-1">{{showTableData.apRsmQty}}</td>
+              </tr>
+              <tr *ngFor="let item of showTableData.apRsmQtyList;let i=index">
+                <th *ngIf="i==0">Zonal Head</th>
+                <td>{{item.qty}}</td>
+                <td *ngIf="i==showTableData.apAsmQtyList.length-1">{{showTableData.apZonalQty}} > </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="successModel" tabindex="-1" role="dialog" aria-labelledby="successModel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="container mt-5">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+              <div class="alert alert_success"> <button aria-hidden="true" data-dismiss="alert" class="close"
+                  type="button">&times;</button> <strong>success!</strong> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModalLabelRsm" tabindex="-1" role="dialog" aria-labelledby="myModalLabelRsm"
+    aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <!-- Modal content goes here -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel">Modal Title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>This is the modal body.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModalLabelZonal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelZonal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- Modal content goes here -->
+        <div class="modal-header">
+          <h2 class="modal-title" id="myModalLabel">Zonal Qty Calculation</h2>&nbsp;&nbsp; <h2 style="color:blue"
+            class="modal-title" id="myModalLabel"> {{showTableData.brand}}</h2>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table align-center">
+            <thead>
+              <tr *ngFor="let item of showTableData.apAsmQtyList;let i=index">
+                <th *ngIf="i==0">HEAD</th>
+                <th>ASM-{{i+1}}</th>
+                <th *ngIf="i==showTableData.apAsmQtyList.length-1">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of showTableData.apAsmQtyList;let i=index">
+                <th *ngIf="i==0">ASM</th>
+                <td>{{item.qty}}</td>
+                <td *ngIf="i==showTableData.apAsmQtyList.length-1">{{showTableData.apAsmQty}}</td>
+              </tr>
+              <tr *ngFor="let item of showTableData.apRsmQtyList;let i=index">
+                <th *ngIf="i==0">RSM</th>
+                <td>{{item.qty}}</td>
+                <td *ngIf="i==showTableData.apAsmQtyList.length-1">{{showTableData.apRsmQty}}</td>
+              </tr>
+              <tr *ngFor="let item of showTableData.apZonalQtyList;let i=index">
+                <th *ngIf="i==0">Zonal Head</th>
+                <td>{{item.qty}}</td>
+                <td *ngIf="i==showTableData.apZonalQtyList.length-1"><input type="text"
+                    (blur)="getCalculationZonal($event,showTableData.GridPlanId)" value="{{showTableData.apZonalQty}}">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <app-loading *ngIf="isLoading"></app-loading>
+ 
+</div>

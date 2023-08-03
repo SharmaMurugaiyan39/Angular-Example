@@ -1,0 +1,61 @@
+<img style="height: 50px;" src="http://3.89.86.219:8080/vkc/assets/images/vkclogo.png"/>
+
+<div class="header">
+    <h1 style="  text-transform: uppercase; background-color: white; 
+    color: black; 
+    border: 2px solid lightblue;">Zonel Head Planned Qty And Calculation</h1>
+  </div>
+  <br>
+<div  class="container">
+    <ul class="nav nav-tabs nav-fill mb-3">
+        <li style="text-transform: uppercase" class="nav-link active" *ngFor="let item of zonalPlanned; let i=index"
+            [ngClass]="{ 'active': item.isActive }" aria-current="page">
+            <a (click)="zonalPlannedClick(item.label,item,i)" class="nav-link" >{{item.label}}</a>
+        </li>
+    </ul>
+
+</div>
+
+<div *ngIf="isNew" class="table-responsive">
+
+    <table  class="table align-center">
+        <thead  class="thead-dark">
+            <tr>
+               
+                <th>statePlan Code</th>
+                <th>State CODE</th>
+                <th>Month</th>
+                <th>status</th>
+                <th>created By</th>
+                <th>created Date</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="zonalRsmData.length==0" >  
+                <td align="center" colspan="7">NO RECORD FOUND</td>
+            </tr>
+            <tr *ngFor="let item of zonalRsmData;let i=index">
+                
+                <td>{{item.statePlanCode}}</td>
+                <td>{{item.stateCode}}</td>
+                <td>{{item.planMonth}}</td>
+                <td> <button style="  text-transform: uppercase; background-color: white; 
+                    color: black; 
+                    border: 2px solid red;"  disabled> {{item.statusText}}</button></td>
+                <td>{{item.createdBy}}</td>
+                <td>{{item.createdDt}}</td>
+                <td><button   style="  text-transform: uppercase; background-color: white; 
+                    color: black; 
+                    border: 2px solid #4CAF50;"  (click)=" clickEventOfGridPlan(item.statePlanId,'save')" > Edit</button> &nbsp;&nbsp;
+                <button  style="  text-transform: uppercase;background-color: white; 
+                    color: black; 
+                    border: 2px solid lightcoral;" (click)=" clickEventOfGridPlan(item.statePlanId,'confirm')" >  Confirm</button></td>
+                <!-- (click)=" clickEventOfGridPlan(item.statePlanId)" -->
+                
+            </tr>
+        </tbody>
+
+    </table>
+</div>
