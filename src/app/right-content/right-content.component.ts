@@ -54,15 +54,61 @@ export class RightContentComponent implements OnInit {
   openModelZonalCalculation(item: any, i: number, value: any): void {
     const myModal = document.getElementById('myModalLabelZonal');
     this.showTableData = item;
-  
     console.log(this.showTableData);
     this.tableData[i].apZonalQty = value;
+    console.log("Flag Set Open",this.QtyChangeFlag)
+    if(this.QtyChangeFlag)
+    {
     this.calculationQty(i,value);
+    }
+    else
+    {
+      this.setValueZonalQty(i,value);
+    }
     const modal = new bootstrap.Modal(myModal);
     this.Newindex = i;
     modal.show(item);
   }
 
+  setValueZonalQty(i: number,value : any)
+  {
+   
+    this.tableData[i].apZonalQty = value;
+    for (let j = 0; j < this.tableData[i].apZonalQtyList.length; j++) {
+        this.tableData[i].apZonalQtyList[j].qty = this.tableData[i].apZonalQtyList[j].qty;
+     
+    }
+  
+  }
+  onClickedOutside()
+  {
+    this.Newindex=0;
+    this.QtyChangeFlag=false;
+    console.log("close function call" )
+  }
+  calculationQtyNew(i:any,event : any,value : any)
+  {
+    console.log("size",i);
+    console.log("size mail locaton",this.Newindex)
+    console.log("size111",value)
+
+    this.tableData[this.Newindex].apZonalQtyList[i].qty=value;
+
+    let number=0;
+    for(let index=0;index<this.tableData[this.Newindex].apZonalQtyList.length;index++)
+    {
+      number=number+parseInt(this.tableData[this.Newindex].apZonalQtyList[index].qty)
+    }
+    this.tableData[this.Newindex].apZonalQty=number;
+  }
+
+  QtyChangeFlag:Boolean=false;
+  savedFlag(flag : Boolean,event : any)
+  {
+   
+    this.QtyChangeFlag=flag;
+    console.log("Flag Set neeww",this.QtyChangeFlag)
+  }
   calculationQty(i:number ,value : any)
   {
     let number=0;
@@ -89,8 +135,17 @@ export class RightContentComponent implements OnInit {
   getCalculationZonal(event: any, gridplanId: any) {
     const inputValue = event.target.value;
     console.log(inputValue, 388783434, this.Newindex);
+    console.log("Flag Set Calculation",this.QtyChangeFlag)
     let i = this.Newindex;
-    this.calculationQty(i,inputValue);
+    if(this.QtyChangeFlag)
+    {
+      this.calculationQty(i,inputValue);
+    }
+    else
+    {
+      this.setValueZonalQty(i,inputValue);
+    }
+  
   }
 
 

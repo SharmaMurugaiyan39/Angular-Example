@@ -31,7 +31,7 @@ export class ApiService {
 
   getNewDataFromTableId(id: number, type: String): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.get<any>(this.baseUrl+"rsm-final-plan?type=" + type + "&gridPlanId=" + id + "&stateCode=TN", { headers });
+    return this.http.get<any>(this.baseUrl+"zonal-final-plan?type=" + type + "&gridPlanId=" + id + "&stateCode=TN", { headers });
   }
   saveZonalPostRequest(payload: any,id: number) {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);

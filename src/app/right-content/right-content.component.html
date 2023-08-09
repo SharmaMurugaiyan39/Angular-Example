@@ -109,7 +109,7 @@
            </td>
            <td>
 
-             <input type="text" style="width: 50px;box-sizing: border-box;" value="{{item.apZonalQty}}" #inputField>
+             <input type="text" style="width: 50px;box-sizing: border-box;" (keypress)="savedFlag(true,$event)" (keyup)="savedFlag(true,$event)" value="{{item.apZonalQty}}" #inputField>
              &nbsp;<button (click)="openModelZonalCalculation(item,i,inputField.value)" type="button">
                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="" fill="currentColor"
                  class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
@@ -167,7 +167,7 @@
             </td>
             <td>
 
-              <input type="text" style="width: 50px;box-sizing: border-box;" value="{{item.apZonalQty}}" #inputField>
+              <input type="text" style="width: 50px;box-sizing: border-box;" (keypress)="savedFlag(true,$event)" (keyup)="savedFlag(true,$event)" value="{{item.apZonalQty}}" value="{{item.apZonalQty}}" #inputField>
               &nbsp;<button (click)="openModelZonalCalculation(item,i,inputField.value)" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="" fill="currentColor"
                   class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
@@ -280,7 +280,7 @@
     </div>
   </div>
   <div class="modal fade" id="myModalLabelZonal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelZonal"
-    aria-hidden="true">
+    aria-hidden="true" (blur)="onClickedOutside()">
     <div class="modal-dialog" style="max-width: 60%;" role="document">
       <div class="modal-content">
         <!-- Modal content goes here -->
@@ -320,8 +320,8 @@
               <tr >
                 <ng-container *ngFor="let item of showTableData.apZonalQtyList;let i=index">
                 <th *ngIf="i==0">Zonal Head</th>
-                <td> <input type="text" value={{item.qty}}></td>
-                <td *ngIf="i==showTableData.apZonalQtyList.length-1"><input type="text"
+                <td> <input type="text"   (keypress)="calculationQtyNew(i,$event,zonalQtyText.value)" (keyup)="calculationQtyNew(i,$event,zonalQtyText.value)" value={{item.qty}} #zonalQtyText></td>
+                <td *ngIf="i==showTableData.apZonalQtyList.length-1"><input type="text" 
                     (blur)="getCalculationZonal($event,showTableData.GridPlanId)" value="{{showTableData.apZonalQty}}">
                 </td>
               </ng-container>
