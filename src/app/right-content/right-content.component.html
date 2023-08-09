@@ -16,8 +16,26 @@
      
       <table class="table align-center">
         <thead class="thead-dark">
+          <tr *ngIf="tableData.length !==0">
+            <td class="sticky-column"><input #textInput type="text" (keypress)="keyPressedFilter(textInput.value,1,'brand')" (keyup)="keyPressedFilter(textInput.value,2,'brand')" placeholder="Brand"></td>
+            <td><input type="text"  #textInput2 (keypress)="keyPressedFilter(textInput2.value,1,'statePlanId')" (keyup)="keyPressedFilter(textInput2.value,2,'statePlanId')"  placeholder="StatePlanId" ></td>
+            <td><input type="text"  #textInput3 (keypress)="keyPressedFilter(textInput3.value,1,'sizeCat')" (keyup)="keyPressedFilter(textInput2.value,2,'sizeCat')" placeholder="Size Cat"></td>
+            <td><input type="text"  #textInput4 (keypress)="keyPressedFilter(textInput4.value,1,'productType')" (keyup)="keyPressedFilter(textInput4.value,2,'productType')" placeholder="Product Type"></td>
+            <td><input type="text"  #textInput5 (keypress)="keyPressedFilter(textInput5.value,1,'mrp')" (keyup)="keyPressedFilter(textInput5.value,2,'mrp')" placeholder="Mrp"></td>
+            <td><input type="text"  #textInput6 (keypress)="keyPressedFilter(textInput6.value,1,'model')" (keyup)="keyPressedFilter(textInput6.value,2,'model')" placeholder="Model"></td>
+            <td><input type="text"  #textInput7 (keypress)="keyPressedFilter(textInput7.value,1,'color')" (keyup)="keyPressedFilter(textInput7.value,2,'color')" placeholder="Color"></td>
+            <td><input type="text"  #textInput8 (keypress)="keyPressedFilter(textInput8.value,1,'gridPlanItemId')" (keyup)="keyPressedFilter(textInput8.value,2,'gridPlanItemId')" placeholder="gridPlanItemId"></td>
+    
+            <td colspan="11" > </td>
+            <th>Total Qty :-</th>
+            <th>{{totalQty}}</th>
+          </tr>
+        </thead>
+        
+        <thead class="thead-dark">
           <tr>
-            <th class="sticky-column">Brand </th>
+          
+            <th  class="sort-by" class="sticky-column">Brand </th>
             <th>State Plan Id</th>
             <th>Size Cat</th>
             <th>Product Type</th>
@@ -27,7 +45,6 @@
             <th>GridPlan Item Id</th>
             <th>Grade </th>
             <th>Image</th>
-            <th>Item Model id</th>
             <th>Q.P</th>
             <th>Asm Qty</th>
             <th>Rsm Qty</th>
@@ -39,7 +56,6 @@
             <th>AP Asm Qty</th>
             <th>AP Rsm Qty</th>
             <th>AP Zonal Qty</th>
-        
 
           </tr>
         </thead>
@@ -47,7 +63,72 @@
           <tr *ngIf="tableData.length ==0">
             <td  class="sticky-column" style="width: fit-content; margin-left: 0ch;" > No record Found</td>
           </tr>
-          <tr *ngFor="let item of tableData;let i=index">
+          
+        
+          <tr *ngIf="filterFlag && NewtableData.length ==0">
+            <td  class="sticky-column" style="width: fit-content; margin-left: 0ch;" > No record Found</td>
+        </tr>
+          <ng-container *ngFor="let item of NewtableData;let i=index">
+        
+          <tr *ngIf="filterFlag" >
+           <td class="sticky-column">{{item.brand}}</td>
+           <td>{{item.statePlanId}}</td>
+           <td>{{item.sizeCat}}</td>
+           <td>{{item.productType}}</td>
+           <td>{{item.mrp}}</td>
+           <td>{{item.model}}</td>
+           <td>{{item.color}}</td>
+           <td>{{item.gridPlanItemId}}</td>
+           <td>{{item.grade}}</td>
+           <td><img src={{item.imageLink}} /></td>
+           <td>{{item.qtyToPlan}}</td>
+           <td>{{item.asmQty}}</td>
+           <td>{{item.rsmQty}}</td>
+           <td>{{item.previousMonthAverageSale}}</td>
+           <td>{{item.depotStock}}</td>
+           <td>{{item.pMsale1}}</td>
+           <td>{{item.pMsale2}}</td>
+           <td>{{item.pMsale3}}</td>
+           <td> {{item.apAsmQty}}
+
+             <!-- <input type="text" style="width: 50px;box-sizing: border-box;" >
+               &nbsp;<button (click)="openModelAsmCalculation(item,i)" type="button">
+               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="" fill="currentColor" class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
+               <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+               <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+             </svg></button> -->
+           </td>
+           <td>
+             <!-- <input type="text" style="width: 50px;box-sizing: border-box;" >
+               &nbsp;<button (click)="openModelRsmCalculation(item,i)" type="button">
+               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="" fill="currentColor" class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
+               <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+               <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+             </svg></button> -->
+             {{item.apRsmQty}}
+           </td>
+           <td>
+
+             <input type="text" style="width: 50px;box-sizing: border-box;" value="{{item.apZonalQty}}" #inputField>
+             &nbsp;<button (click)="openModelZonalCalculation(item,i,inputField.value)" type="button">
+               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="" fill="currentColor"
+                 class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
+                 <path
+                   d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
+                 <path
+                   d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+               </svg></button>
+           </td>
+     
+
+         </tr>
+        </ng-container>
+         
+        <ng-container *ngFor="let item of tableData;let i=index">
+          <tr *ngIf="tableData.length ==0">
+            <td  class="sticky-column" style="width: fit-content; margin-left: 0ch;" > No record Found</td>
+          </tr>
+        <tr *ngIf="!filterFlag">
             <td class="sticky-column">{{item.brand}}</td>
             <td>{{item.statePlanId}}</td>
             <td>{{item.sizeCat}}</td>
@@ -59,7 +140,6 @@
             <td>{{item.grade}}</td>
             <td><img src={{item.imageLink}} /></td>
             <td>{{item.itemModelId}}</td>
-            <td>{{item.qtyToPlan}}</td>
             <td>{{item.asmQty}}</td>
             <td>{{item.rsmQty}}</td>
             <td>{{item.previousMonthAverageSale}}</td>
@@ -100,6 +180,7 @@
       
 
           </tr>
+          </ng-container>
         </tbody>
 
       </table>
@@ -116,8 +197,8 @@
   </div>
   <div class="modal fade" id="myModalLabelAsm" tabindex="-1" role="dialog" aria-labelledby="myModalLabelAsm"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-lg"  style="max-width: 80%;" role="document">
+      <div class="modal-content" >
 
 
         <!-- Modal content goes here -->
@@ -200,7 +281,7 @@
   </div>
   <div class="modal fade" id="myModalLabelZonal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelZonal"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" style="max-width: 60%;" role="document">
       <div class="modal-content">
         <!-- Modal content goes here -->
         <div class="modal-header">
@@ -212,29 +293,38 @@
         <div class="modal-body">
           <table class="table align-center">
             <thead>
-              <tr *ngFor="let item of showTableData.apAsmQtyList;let i=index">
+              <tr>
+                <ng-container *ngFor="let item of showTableData.apAsmQtyList;let i=index">
                 <th *ngIf="i==0">HEAD</th>
                 <th>ASM-{{i+1}}</th>
                 <th *ngIf="i==showTableData.apAsmQtyList.length-1">TOTAL</th>
+                </ng-container>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of showTableData.apAsmQtyList;let i=index">
+     
+              <tr >
+                <ng-container *ngFor="let item of showTableData.apAsmQtyList;let i=index">
                 <th *ngIf="i==0">ASM</th>
                 <td>{{item.qty}}</td>
                 <td *ngIf="i==showTableData.apAsmQtyList.length-1">{{showTableData.apAsmQty}}</td>
+                </ng-container>
               </tr>
-              <tr *ngFor="let item of showTableData.apRsmQtyList;let i=index">
-                <th *ngIf="i==0">RSM</th>
+              <tr >
+                <ng-container *ngFor="let item of showTableData.apRsmQtyList;let i=index">
+                <th *ngIf="i==0">ASM</th>
                 <td>{{item.qty}}</td>
-                <td *ngIf="i==showTableData.apAsmQtyList.length-1">{{showTableData.apRsmQty}}</td>
+                <td *ngIf="i==showTableData.apRsmQtyList.length-1"> {{showTableData.apRsmQty}}</td>
+                </ng-container>
               </tr>
-              <tr *ngFor="let item of showTableData.apZonalQtyList;let i=index">
+              <tr >
+                <ng-container *ngFor="let item of showTableData.apZonalQtyList;let i=index">
                 <th *ngIf="i==0">Zonal Head</th>
-                <td>{{item.qty}}</td>
+                <td> <input type="text" value={{item.qty}}></td>
                 <td *ngIf="i==showTableData.apZonalQtyList.length-1"><input type="text"
                     (blur)="getCalculationZonal($event,showTableData.GridPlanId)" value="{{showTableData.apZonalQty}}">
                 </td>
+              </ng-container>
               </tr>
 
             </tbody>
