@@ -103,11 +103,19 @@ export class RightContentComponent implements OnInit {
   }
 
   QtyChangeFlag:Boolean=false;
-  savedFlag(flag : Boolean,event : any)
+  savedFlag(flag : Boolean,event : any,locationIndex : any)
   {
-   
+
     this.QtyChangeFlag=flag;
-    console.log("Flag Set neeww",this.QtyChangeFlag)
+    console.log("Flag Set neeww",this.QtyChangeFlag);
+   this.calculationQty(locationIndex,event.target.value);
+
+   let number=0;
+   for(let i =0;i<this.tableData.length;i++)
+   {
+    number=number+  parseInt(this.tableData[i].apZonalQty);
+   }
+   this.totalQty=number;
   }
   calculationQty(i:number ,value : any)
   {

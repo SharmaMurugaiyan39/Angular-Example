@@ -40,8 +40,9 @@ export class ApiService {
   }
   confirmZonalPostRequest(id: number) {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    const url = this.baseUrl+'zonal-final-plan?action=confirm&statePlanId='+id+""; // Replace with your API endpoint
-    return this.http.post(url, { headers });
+    const url = this.baseUrl+'zonal-final-plan/'+id+"/grid:confirm"; // Replace with your API endpoint
+    console.log(url);
+    return this.http.post(url,{}, { headers });
   }
 
 
