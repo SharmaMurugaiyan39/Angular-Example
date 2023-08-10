@@ -83,3 +83,10 @@ input[type=text] {
   transition: 0.5s;
   outline: none;
 }
+tr.clicked {
+  background-color: #f0f0f0;
+}
+tbody tr:hover{
+  background-color: lightblue;
+  cursor: pointer;
+}

@@ -19,7 +19,7 @@
           <tr *ngIf="tableData.length !==0">
             <td class="sticky-column"><input #textInput type="text" (keypress)="keyPressedFilter(textInput.value,1,'brand')" (keyup)="keyPressedFilter(textInput.value,2,'brand')" placeholder="Brand"></td>
             <td><input type="text"  #textInput2 (keypress)="keyPressedFilter(textInput2.value,1,'statePlanId')" (keyup)="keyPressedFilter(textInput2.value,2,'statePlanId')"  placeholder="StatePlanId" ></td>
-            <td><input type="text"  #textInput3 (keypress)="keyPressedFilter(textInput3.value,1,'sizeCat')" (keyup)="keyPressedFilter(textInput2.value,2,'sizeCat')" placeholder="Size Cat"></td>
+            <td><input type="text"  #textInput3 (keypress)="keyPressedFilter(textInput3.value,1,'sizeCat')" (keyup)="keyPressedFilter(textInput3.value,2,'sizeCat')" placeholder="Size Cat"></td>
             <td><input type="text"  #textInput4 (keypress)="keyPressedFilter(textInput4.value,1,'productType')" (keyup)="keyPressedFilter(textInput4.value,2,'productType')" placeholder="Product Type"></td>
             <td><input type="text"  #textInput5 (keypress)="keyPressedFilter(textInput5.value,1,'mrp')" (keyup)="keyPressedFilter(textInput5.value,2,'mrp')" placeholder="Mrp"></td>
             <td><input type="text"  #textInput6 (keypress)="keyPressedFilter(textInput6.value,1,'model')" (keyup)="keyPressedFilter(textInput6.value,2,'model')" placeholder="Model"></td>
@@ -322,7 +322,7 @@
                 <th *ngIf="i==0">Zonal Head</th>
                 <td> <input type="text"   (keypress)="calculationQtyNew(i,$event,zonalQtyText.value)" (keyup)="calculationQtyNew(i,$event,zonalQtyText.value)" value={{item.qty}} #zonalQtyText></td>
                 <td *ngIf="i==showTableData.apZonalQtyList.length-1"><input type="text" 
-                    (blur)="getCalculationZonal($event,showTableData.GridPlanId)" value="{{showTableData.apZonalQty}}">
+                    (blur)="getCalculationZonal($event,showTableData.GridPlanId)" (ngModel)="totalQty" value="{{showTableData.apZonalQty}}">
                 </td>
               </ng-container>
               </tr>
