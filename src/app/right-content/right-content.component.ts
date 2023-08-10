@@ -56,62 +56,55 @@ export class RightContentComponent implements OnInit {
     this.showTableData = item;
     console.log(this.showTableData);
     this.tableData[i].apZonalQty = value;
-    console.log("Flag Set Open",this.QtyChangeFlag)
-    if(this.QtyChangeFlag)
-    {
-    this.calculationQty(i,value);
+    console.log("Flag Set Open", this.QtyChangeFlag)
+    if (this.QtyChangeFlag) {
+      this.calculationQty(i, value);
     }
-    else
-    {
-      this.setValueZonalQty(i,value);
+    else {
+      this.setValueZonalQty(i, value);
     }
     const modal = new bootstrap.Modal(myModal);
     this.Newindex = i;
     modal.show(item);
   }
 
-  setValueZonalQty(i: number,value : any)
-  {
-   
+  setValueZonalQty(i: number, value: any) {
+
     this.tableData[i].apZonalQty = value;
     for (let j = 0; j < this.tableData[i].apZonalQtyList.length; j++) {
-        this.tableData[i].apZonalQtyList[j].qty = this.tableData[i].apZonalQtyList[j].qty;
-     
+      this.tableData[i].apZonalQtyList[j].qty = this.tableData[i].apZonalQtyList[j].qty;
+
     }
-  
+
   }
-  onClickedOutside()
-  {
-    this.Newindex=0;
-    this.QtyChangeFlag=false;
-    console.log("close function call" )
+  onClickedOutside() {
+    this.Newindex = 0;
+    this.QtyChangeFlag = false;
+    console.log("close function call")
   }
-  calculationQtyNew(i:any,event : any,value : any)
-  {
+  calculationQtyNew(i: any, event: any, value: any) {
     const inputChar = String.fromCharCode(event.which);
 
     // Allow only numeric characters (0-9) and backspace
     if (!/^[0-9\b]+$/.test(inputChar)) {
       event.preventDefault();
     }
-    console.log("size",i);
-    console.log("size mail locaton",this.Newindex)
-    console.log("size111",value)
+    console.log("size", i);
+    console.log("size mail locaton", this.Newindex)
+    console.log("size111", value)
 
-    this.tableData[this.Newindex].apZonalQtyList[i].qty=value;
+    this.tableData[this.Newindex].apZonalQtyList[i].qty = value;
 
-    let number=0;
-    for(let index=0;index<this.tableData[this.Newindex].apZonalQtyList.length;index++)
-    {
-      number=number+parseInt(this.tableData[this.Newindex].apZonalQtyList[index].qty)
+    let number = 0;
+    for (let index = 0; index < this.tableData[this.Newindex].apZonalQtyList.length; index++) {
+      number = number + parseInt(this.tableData[this.Newindex].apZonalQtyList[index].qty)
     }
-    this.tableData[this.Newindex].apZonalQty=number;
+    this.tableData[this.Newindex].apZonalQty = number;
   }
 
-  QtyChangeFlag:Boolean=false;
-  savedFlag(flag : Boolean,event : any,locationIndex : any)
-  {
-  
+  QtyChangeFlag: Boolean = false;
+  savedFlag(flag: Boolean, event: any, locationIndex: any) {
+
     const inputChar = String.fromCharCode(event.which);
 
     // Allow only numeric characters (0-9) and backspace
@@ -119,20 +112,18 @@ export class RightContentComponent implements OnInit {
       event.preventDefault();
     }
 
-    this.QtyChangeFlag=flag;
-    console.log("Flag Set neeww",this.QtyChangeFlag);
-   this.calculationQty(locationIndex,event.target.value);
+    this.QtyChangeFlag = flag;
+    console.log("Flag Set neeww", this.QtyChangeFlag);
+    this.calculationQty(locationIndex, event.target.value);
 
-   let number=0;
-   for(let i =0;i<this.tableData.length;i++)
-   {
-    number=number+  parseInt(this.tableData[i].apZonalQty);
-   }
-   this.totalQty=number;
+    let number = 0;
+    for (let i = 0; i < this.tableData.length; i++) {
+      number = number + parseInt(this.tableData[i].apZonalQty);
+    }
+    this.totalQty = number;
   }
-  calculationQty(i:number ,value : any)
-  {
-    let number=0;
+  calculationQty(i: number, value: any) {
+    let number = 0;
     let totalZonal = value / 2;
     this.tableData[i].apZonalQty = value;
     for (let j = 0; j < this.tableData[i].apZonalQtyList.length; j++) {
@@ -151,11 +142,11 @@ export class RightContentComponent implements OnInit {
         this.tableData[i].apZonalQtyList[j].qty = parseInt(dotSplit[0]) + number;
       }
     }
-    
+
   }
 
-  qtyZonal : any;
-  getCalculationZonal(event: any, gridplanId: any,flag: boolean) {
+  qtyZonal: any;
+  getCalculationZonal(event: any, gridplanId: any, flag: boolean) {
     const inputChar = String.fromCharCode(event.which);
 
     // Allow only numeric characters (0-9) and backspace
@@ -164,23 +155,20 @@ export class RightContentComponent implements OnInit {
     }
     const inputValue = event.target.value;
     console.log(inputValue, 388783434, this.Newindex);
-    console.log("Flag Set Calculation",this.QtyChangeFlag)
+    console.log("Flag Set Calculation", this.QtyChangeFlag)
     let i = this.Newindex;
-   
-    if(flag && this.QtyChangeFlag)
-    {
-      this.calculationQty(i,inputValue);
+
+    if (flag && this.QtyChangeFlag) {
+      this.calculationQty(i, inputValue);
     }
-    else if(flag && !this.QtyChangeFlag)
-    {
-      this.calculationQty(i,inputValue);
+    else if (flag && !this.QtyChangeFlag) {
+      this.calculationQty(i, inputValue);
     }
-    else
-    {
-      this.setValueZonalQty(i,inputValue);
-      
+    else {
+      this.setValueZonalQty(i, inputValue);
+
     }
-  
+
   }
 
 
