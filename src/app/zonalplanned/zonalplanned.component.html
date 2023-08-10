@@ -22,14 +22,26 @@
         <thead  class="thead-dark">
             <tr>
                
-                <th>statePlan Code</th>
-                <th>State CODE</th>
-                <th>Month</th>
-                <th>status</th>
-                <th>created By</th>
-                <th>created Date</th>
-                
-                    <th *ngIf="runningFlag">Action</th>
+                <th >statePlan Code <button class="sorted-btn" (click)="sortedBy('statePlanCode')" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+  <path d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+</svg></button></th>
+                <th>State CODE <button class="sorted-btn" (click)="sortedBy('stateCode')" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+  <path d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+</svg></button></th>
+                <th>Month  <button class="sorted-btn" (click)="sortedBy('planMonth')" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+  <path d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+</svg></button></th>
+                <th>status <button class="sorted-btn" (click)="sortedBy('statusText')" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+  <path d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+</svg></button></th>
+                <th>created By <button class="sorted-btn" class="sorted-btn" (click)="sortedBy('createdBy')" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+  <path d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+</svg></button></th>
+                <th>created Date <button class="sorted-btn" (click)="sortedBy('createdDt')" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+  <path d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+</svg></button></th>
+            
+                <th *ngIf="runningFlag">Action</th>
 
             </tr>
         </thead>
@@ -37,7 +49,7 @@
             <tr *ngIf="zonalRsmData.length==0" >  
                 <td align="center" colspan="7">NO RECORD FOUND</td>
             </tr>
-            <tr  (click)=" runningFlag && clickEventOfGridPlan(item.statePlanId,'save')"  [ngClass]="{'clicked': item.clicked}" class="clickable-row" *ngFor="let item of zonalRsmData;let i=index">
+            <tr  (click)=" runningFlag && clickEventOfGridPlan(item.statePlanId,'save',$event,i)"  [ngClass]="{'clicked': item.clicked}" class="clickable-row" *ngFor="let item of zonalRsmData;let i=index">
                 
                 <td>{{item.statePlanCode}}</td>
                 <td>{{item.stateCode}}</td>
@@ -58,10 +70,10 @@
                 <div *ngIf="runningFlag">
                 <td><button   style="  text-transform: uppercase; background-color: white; 
                     color: black; 
-                    border: 2px solid #4CAF50;"  (click)=" clickEventOfGridPlan(item.statePlanId,'save')" > Edit</button> &nbsp;&nbsp;
+                    border: 2px solid #4CAF50;"  (click)=" clickEventOfGridPlan(item.statePlanId,'save',$event,i)" > Edit</button> &nbsp;&nbsp;
                 <button  style="  text-transform: uppercase;background-color: white; 
                     color: black; 
-                    border: 2px solid lightcoral;" (click)=" clickEventOfGridPlan(item.statePlanId,'confirm')" >  Confirm</button></td>
+                    border: 2px solid lightcoral;" (click)=" clickEventOfGridPlan(item.statePlanId,'confirm',$event,i)" >  Confirm</button></td>
                 <!-- (click)=" clickEventOfGridPlan(item.statePlanId)" -->
             </div>
             </tr>

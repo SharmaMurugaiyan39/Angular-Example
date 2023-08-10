@@ -90,3 +90,9 @@ tbody tr:hover{
   background-color: lightblue;
   cursor: pointer;
 }
+.sorted-btn
+{
+  padding: 0;
+border: none;
+background: none;
+}

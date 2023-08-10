@@ -88,6 +88,12 @@ export class RightContentComponent implements OnInit {
   }
   calculationQtyNew(i:any,event : any,value : any)
   {
+    const inputChar = String.fromCharCode(event.which);
+
+    // Allow only numeric characters (0-9) and backspace
+    if (!/^[0-9\b]+$/.test(inputChar)) {
+      event.preventDefault();
+    }
     console.log("size",i);
     console.log("size mail locaton",this.Newindex)
     console.log("size111",value)
@@ -105,6 +111,13 @@ export class RightContentComponent implements OnInit {
   QtyChangeFlag:Boolean=false;
   savedFlag(flag : Boolean,event : any,locationIndex : any)
   {
+  
+    const inputChar = String.fromCharCode(event.which);
+
+    // Allow only numeric characters (0-9) and backspace
+    if (!/^[0-9\b]+$/.test(inputChar)) {
+      event.preventDefault();
+    }
 
     this.QtyChangeFlag=flag;
     console.log("Flag Set neeww",this.QtyChangeFlag);
@@ -138,20 +151,34 @@ export class RightContentComponent implements OnInit {
         this.tableData[i].apZonalQtyList[j].qty = parseInt(dotSplit[0]) + number;
       }
     }
+    
   }
 
-  getCalculationZonal(event: any, gridplanId: any) {
+  qtyZonal : any;
+  getCalculationZonal(event: any, gridplanId: any,flag: boolean) {
+    const inputChar = String.fromCharCode(event.which);
+
+    // Allow only numeric characters (0-9) and backspace
+    if (!/^[0-9\b]+$/.test(inputChar)) {
+      event.preventDefault();
+    }
     const inputValue = event.target.value;
     console.log(inputValue, 388783434, this.Newindex);
     console.log("Flag Set Calculation",this.QtyChangeFlag)
     let i = this.Newindex;
-    if(this.QtyChangeFlag)
+   
+    if(flag && this.QtyChangeFlag)
+    {
+      this.calculationQty(i,inputValue);
+    }
+    else if(flag && !this.QtyChangeFlag)
     {
       this.calculationQty(i,inputValue);
     }
     else
     {
       this.setValueZonalQty(i,inputValue);
+      
     }
   
   }

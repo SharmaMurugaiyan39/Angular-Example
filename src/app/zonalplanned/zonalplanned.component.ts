@@ -2,6 +2,7 @@ import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 import { ApiService } from '../app.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr'; 
 
 @Component({
   selector: 'app-zonalplanned',
@@ -21,15 +22,23 @@ export class ZonalplannedComponent implements OnInit {
 
 
   @Output() statePlanId: any = new EventEmitter();
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private apiService: ApiService,private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.zonalPlannedClick("pending", this.zonalPlanned[0], 0);
 
     this.zonalPlanned[0].isActive = true;
-    this.runningFlag=false;
+    this.runningFlag = false;
 
 
+  }
+
+  sortedBy(item: any) {
+    
+    console.log(item,'Order By Item');
+    this.zonalRsmData
+
+    this.zonalRsmData.sort((a, b) => a[item].localeCompare(b.name));
   }
 
 
@@ -55,8 +64,7 @@ export class ZonalplannedComponent implements OnInit {
           if (selectedItem.value !== 'planned') {
             this.runningFlag = true;
           }
-          else
-          {
+          else {
             this.runningFlag = false;
           }
 
@@ -69,14 +77,30 @@ export class ZonalplannedComponent implements OnInit {
     });
   }
 
+  responseNew : any = [] ;
 
-  clickEventOfGridPlan(statePlanId: any, type: string) {
+  clickEventOfGridPlan(statePlanId: any, type: string,event: any,index:any) {
 
     if (type === 'confirm') {
+       event.stopPropagation();
       this.apiService.confirmZonalPostRequest(statePlanId).subscribe(
         (response) => {
           console.log('Response from the API:', statePlanId);
-
+        
+          this.responseNew=response;
+          console.log("",this.responseNew.body);  
+          if(this.responseNew.status==='FAILURE')
+          {
+            this.toastr.warning(this.responseNew.body, 'Failure');
+          }
+          else
+          {
+          this.toastr.success('State Plan Confirm Successfully!', 'Success');
+          this.zonalRsmData.splice(index,1 );
+          this.zonalPlannedClick("pending", this.zonalPlanned[0], 0);
+    
+          this.zonalPlanned[0].isActive = true;
+          }
           // Handle the API response here
         },
         (error) => {
@@ -84,6 +108,11 @@ export class ZonalplannedComponent implements OnInit {
           // Handle errors here
         }
       );
+     
+      
+    
+
+    
 
     }
     else {

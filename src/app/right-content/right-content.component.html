@@ -321,8 +321,9 @@
                 <ng-container *ngFor="let item of showTableData.apZonalQtyList;let i=index">
                 <th *ngIf="i==0">Zonal Head</th>
                 <td> <input type="text"   (keypress)="calculationQtyNew(i,$event,zonalQtyText.value)" (keyup)="calculationQtyNew(i,$event,zonalQtyText.value)" value={{item.qty}} #zonalQtyText></td>
-                <td *ngIf="i==showTableData.apZonalQtyList.length-1"><input type="text" 
-                    (blur)="getCalculationZonal($event,showTableData.GridPlanId)" (ngModel)="totalQty" value="{{showTableData.apZonalQty}}">
+                <td *ngIf="i==showTableData.apZonalQtyList.length-1">
+                  <input type="text"   (keypress)="getCalculationZonal($event,showTableData.GridPlanId,true)" (keyup)="getCalculationZonal($event,showTableData.GridPlanId,true)"
+                    (blur)="getCalculationZonal($event,showTableData.GridPlanId,true)" (ngModel)="totalQty" value="{{showTableData.apZonalQty}}">
                 </td>
               </ng-container>
               </tr>
