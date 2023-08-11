@@ -261,6 +261,12 @@ export class RightContentComponent implements OnInit {
   fetchTableData() {
 
   }
+  sortedBy(item: any) {
+    
+    console.log(item,'Order By Item');
+    
+    this.tableData.sort((a, b) => a[item].localeCompare(b.name));
+  }
 
   getDimensionsByFilter(event: any) {
     return this.tableData.filter(x => x.brand === event.target.value);

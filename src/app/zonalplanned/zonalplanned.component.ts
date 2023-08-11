@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ZonalplannedComponent implements OnInit {
 
   zonalPlanned = [
-    { label: 'Yet to Allocated', isActive: false, value: "pending" },
+    { label: 'Yet to Allocated', isActive: false, value: "pending"},
     { label: 'Completed', isActive: false, value: "planned" }
   ];
 
@@ -36,8 +36,6 @@ export class ZonalplannedComponent implements OnInit {
   sortedBy(item: any) {
     
     console.log(item,'Order By Item');
-    this.zonalRsmData
-
     this.zonalRsmData.sort((a, b) => a[item].localeCompare(b.name));
   }
 
@@ -67,8 +65,6 @@ export class ZonalplannedComponent implements OnInit {
           else {
             this.runningFlag = false;
           }
-
-
         },
         (error) => {
           console.error('Error fetching data:', error);
