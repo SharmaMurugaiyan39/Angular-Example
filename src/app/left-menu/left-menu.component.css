@@ -31,4 +31,14 @@ div {
 width: fit-content;
 }
 
+.disable-hover {
+  pointer-events: none;
+}
+
+/* Define your active styling here */
+.active {
+  background-color: #007bff; /* Example active background color */
+  color: #fff; /* Example active text color */
+}
+
 

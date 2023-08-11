@@ -59,8 +59,23 @@ export class LeftMenuComponent implements OnInit {
  
   }
 
+  
+  clickedItems: boolean[] = [];
+  
   selectMenuItem(item: string,i : number) {
-
+    
+    for(let m=0;m<this.gridPlans.length;m++)
+    {
+       if(m!=i)
+       {
+        this.clickedItems[m] = false;
+       } 
+    }
+    if (!this.clickedItems[i]) {
+      this.clickedItems[i] = true;
+      // Your existing logic for selecting the menu item
+    }
+  
     if(item==='')
     {
     
@@ -78,6 +93,7 @@ export class LeftMenuComponent implements OnInit {
     this.activeIndex = index;
     this.apiService.changeContent(item);
     let data = true;
+    
     this.tabClick.emit(data);
 
   }

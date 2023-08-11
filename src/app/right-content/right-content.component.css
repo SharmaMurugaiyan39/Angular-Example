@@ -48,6 +48,9 @@ thead {
   table-layout: fixed; /* Fixed table layout to handle column width properly */
 }
 
+.disable-hover {
+  pointer-events: none; /* Disable pointer events */
+}
 
 input[type=text] {
   width: 100px;
